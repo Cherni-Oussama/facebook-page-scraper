@@ -65,13 +65,12 @@ def close_error_popup(driver):
         driver.find_element(By.CSS_SELECTOR, "[aria-label=Close]").click()
 
     except WebDriverException as e:
-        print(e)
-        pass
-    except NoSuchElementException:
-        pass
+        WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "[aria-label=Close]")))
+        driver.find_element(By.CSS_SELECTOR, "[aria-label=Close]").click()
 
     except Exception as ex:
         print("error at close_error_popup method : {}".format(ex))
+
 
 
 def scroll_down_first(driver):
