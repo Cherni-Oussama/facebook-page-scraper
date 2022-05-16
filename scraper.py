@@ -49,5 +49,5 @@ class FacebookScraper:
                 "video": video,
                 "image": images,
             }
-        json_data = json.dumps(self.data_dict, indent=4)
-        return json_data
+        # json_data = json.dumps(self.data_dict, indent=4)
+        return self.data_dict
