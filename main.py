@@ -7,5 +7,10 @@
 # @Contact :   oussama.cherni@ensi-uma.tn
 # ---------------------------------------------------------------------------
 
+from utils import *
+
+
 if __name__ == "__main__":
-    pass
+    download_chrome_driver()
+    driver = initialize_driver()
+    driver.quit()
