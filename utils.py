@@ -65,19 +65,26 @@ def download_chrome_driver():
 
 
 def initialize_driver():
-    options = webdriver.ChromeOptions()
-    options.add_argument("--lang=en")
-    options.add_argument("--start-maximized")  # open Browser in maximized mode
-    options.add_argument("--no-sandbox")  # bypass OS security model
-    options.add_argument("--disable-dev-shm-usage")  # overcome limited resource problems
-    options.add_argument('--ignore-ssl-errors=yes')
-    options.add_argument('--ignore-certificate-errors')
     if platform == "linux" or platform == "linux2":
+        options = webdriver.ChromeOptions()
         options.binary_location = "/usr/bin/google-chrome"  # chrome binary location specified here
+        options.add_argument("--start-maximized")  # open Browser in maximized mode
+        options.add_argument('--headless')
+        options.add_argument("--no-sandbox")  # bypass OS security model
+        options.add_argument("--disable-dev-shm-usage")  # overcome limited resource problems
+        options.add_argument('--ignore-ssl-errors=yes')
+        options.add_argument('--ignore-certificate-errors')
         driver = webdriver.Chrome(r'/usr/local/share/chromedriver', options=options)
     else:
         cwd = os.getcwd()
         driver_path = os.path.join(cwd, "driver", "chromedriver.exe")
+        options = webdriver.ChromeOptions()
+        options.add_argument("--lang=en")
+        options.add_argument("--start-maximized")  # open Browser in maximized mode
+        options.add_argument("--no-sandbox")  # bypass OS security model
+        options.add_argument("--disable-dev-shm-usage")  # overcome limited resource problems
+        options.add_argument('--ignore-ssl-errors=yes')
+        options.add_argument('--ignore-certificate-errors')
         driver = webdriver.Chrome(driver_path, options=options)
 
     return driver
