@@ -45,7 +45,7 @@ def download_chrome_driver():
     if not os.path.exists(driver_path):
         if not os.path.isdir(folder_driver_path):
             os.mkdir("driver")
-            if chrome_type == "chromedriver_win32" :
+            if chrome_type == "chromedriver_win32":
                 os.system('cmd /c "curl https://chromedriver.storage.googleapis.com/101.0.4951.41/{}.zip > '
                   '{}"'.format(chrome_type, (os.path.join(folder_driver_path, "chrome_driver.zip"))))
                 with zipfile.ZipFile(os.path.join(folder_driver_path, "chrome_driver.zip"), 'r') as zip_ref:
@@ -65,19 +65,20 @@ def download_chrome_driver():
 
 
 def initialize_driver():
-    cwd = os.getcwd()
-    driver_path = os.path.join(cwd, "driver", "chromedriver.exe")
-    print(driver_path)
-
     options = webdriver.ChromeOptions()
-    options.binary_location = "/usr/bin/google-chrome"  # chrome binary location specified here
+    options.add_argument("--lang=en")
     options.add_argument("--start-maximized")  # open Browser in maximized mode
-    options.add_argument('--headless')
     options.add_argument("--no-sandbox")  # bypass OS security model
     options.add_argument("--disable-dev-shm-usage")  # overcome limited resource problems
     options.add_argument('--ignore-ssl-errors=yes')
     options.add_argument('--ignore-certificate-errors')
-    driver = webdriver.Chrome(r'/usr/local/share/chromedriver', options=options)
+    if platform == "linux" or platform == "linux2":
+        options.binary_location = "/usr/bin/google-chrome"  # chrome binary location specified here
+        driver = webdriver.Chrome(r'/usr/local/share/chromedriver', options=options)
+    else:
+        cwd = os.getcwd()
+        driver_path = os.path.join(cwd, "driver", "chromedriver.exe")
+        driver = webdriver.Chrome(driver_path, options=options)
 
     return driver
 
