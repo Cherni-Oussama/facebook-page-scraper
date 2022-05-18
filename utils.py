@@ -21,6 +21,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+import requests
 
 
 def get_os_system():
@@ -215,3 +216,13 @@ def get_images(post):
     for element in elements:
         list_of_images.append(element.get_attribute('src'))
     return list_of_images
+
+
+def check_page_exists(name):
+    url = "https://graph.facebook.com/" + name
+    response = requests.get(url)
+
+    if (response.text.find("Unsupported get request") == -1):
+        return True
+    else:
+        return False
