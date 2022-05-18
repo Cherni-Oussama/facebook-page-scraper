@@ -3,15 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Sample Form</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
 </head>
 <body>
-<p> Please type a valid facebook page name !</p>
-<form method="post">
-    <input type="text" name="name" value="TED"/>
-    <input type="submit">
-</form>
+    <div class="login-box">
+        <h2>Facebook Page Scraper</h2>
+        <p> Please type a valid facebook page name !</p>
+        <form method="post" id="myform">
+        <div class="user-box">
+            <input type="text" name="name" value="TED"/>
+            <label>Page Name:</label>
+        </div>
+        <div class="user-box">
+            <input type="number" name="timeout" value= "100" />
+            <label>Timeout:</label>
+        </div>
+        <a href="#" onclick="document.getElementById('myform').submit()" >  Start Scraping
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+        </form>
+        <p>{{ result }}</p>
 
-<p>Result: {{ result }}</p>
-
+    </div>
 </body>
 </html>

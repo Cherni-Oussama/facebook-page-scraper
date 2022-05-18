@@ -11,13 +11,15 @@ import json
 import uvicorn
 from fastapi import FastAPI, Response, Request, Form
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 
 from scraper import FacebookScraper
 from utils import *
 
 app = FastAPI()
-templates = Jinja2Templates(directory="templates/")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
+templates = Jinja2Templates(directory="templates/")
 
 @app.get("/")
 def form_post(request: Request):
@@ -26,7 +28,7 @@ def form_post(request: Request):
 
 
 @app.post("/")
-def form_post(request: Request, name: str = Form(...)):
+def form_post(request: Request, name: str = Form(...),  timeout: int = Form(...)):
     result = check_page_exists(name)
     if not result:
         return templates.TemplateResponse('form.html', context={'request': request, 'result': "There is not page "
@@ -34,7 +36,7 @@ def form_post(request: Request, name: str = Form(...)):
     else:
         page_name = "TED"
         download_chrome_driver()
-        scraper_fb = FacebookScraper(page_name, 100)
+        scraper_fb = FacebookScraper(page_name, timeout)
         scraper_fb.init_driver()
         scroll_to_bottom(scraper_fb.driver, 8)
         data = scraper_fb.scrape_data()
@@ -46,4 +48,3 @@ def form_post(request: Request, name: str = Form(...)):
 
 if __name__ == "__main__":
     uvicorn.run(app='main:app')
-
