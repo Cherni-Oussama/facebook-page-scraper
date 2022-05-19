@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link href="{{ url_for('static', path='/table_styles.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+      <div class="table">
+
+    <div class="row header">
+          <div class="cell">
+            Page Name
+          </div>
+    </div>
+    <tbody>
+       {% for item in collections %}
+       <div class="row">
+          <div class="cell" data-title="Page Name">
+            <a href="http://localhost/list/{{item}}"> {{item}} </a>
+          </div>
+       </div>
+       {% endfor %}
+    </tbody>
+
+
+      </div>
+    </div>
+
+</body>
+</html>

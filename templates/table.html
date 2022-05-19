@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link href="{{ url_for('static', path='/table_styles.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+      <div class="table">
+
+        <div class="row header">
+          <div class="cell">
+            content
+          </div>
+          <div class="cell">
+            posted_on
+          </div>
+          <div class="cell">
+            SHARES
+          </div>
+          <div class="cell">
+            reaction_count
+          </div>
+          <div class="cell">
+            comments
+          </div>
+
+          <div class="cell">
+            video
+          </div>
+          <div class="cell">
+            image
+          </div>
+        </div>
+    <tbody>
+      {% for post in posts %}
+      <div class="row">
+          <div class="cell" data-title="content">
+            {{ post.content }}
+          </div>
+          <div class="cell" data-title="posted_on">
+            {{ post.posted_on }}
+          </div>
+          <div class="cell" data-title="SHARES">
+            {{ post.shares }}
+          </div>
+          <div class="cell" data-title="reaction_count">
+            {{ post.reaction_count }}
+          </div>
+          <div class="cell" data-title="comments">
+            {{ post.comments }}
+          </div>
+
+          <div class="cell" data-title="video">
+            {{ post.video }}
+          </div>
+          <div class="cell" data-title="image">
+            {{ post.image }}
+          </div>
+        </div>
+      {% endfor %}
+    </tbody>
+
+
+      </div>
+    </div>
+
+</body>
+</html>
