@@ -68,6 +68,7 @@ def download_chrome_driver():
 def initialize_driver():
     if platform == "linux" or platform == "linux2":
         options = webdriver.ChromeOptions()
+        options.add_argument("--lang=en")
         options.binary_location = "/usr/bin/google-chrome"  # chrome binary location specified here
         options.add_argument("--start-maximized")  # open Browser in maximized mode
         options.add_argument('--headless')
@@ -81,6 +82,7 @@ def initialize_driver():
         driver_path = os.path.join(cwd, "driver", "chromedriver.exe")
         options = webdriver.ChromeOptions()
         options.add_argument("--lang=en")
+        options.add_argument('--headless')
         options.add_argument("--start-maximized")  # open Browser in maximized mode
         options.add_argument("--no-sandbox")  # bypass OS security model
         options.add_argument("--disable-dev-shm-usage")  # overcome limited resource problems
@@ -106,10 +108,15 @@ def close_error_popup(driver):
         driver.find_element(By.CSS_SELECTOR, "[aria-label=Close]").click()
 
     except WebDriverException as e:
-        WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "[aria-label=Close]")))
-        driver.find_element(By.CSS_SELECTOR, "[aria-label=Close]").click()
+        try:
+            time.sleep(5)
+            WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "[aria-label=Close]")))
+            driver.find_element(By.CSS_SELECTOR, "[aria-label=Close]").click()
+        except WebDriverException as e:
+            pass
 
     except Exception as ex:
+        pass
         print("error at close_error_popup method : {}".format(ex))
 
 
