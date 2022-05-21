@@ -214,7 +214,7 @@ def get_reactions(post):
 
 def get_posted_time(post):
     element = post.find_element(By.CSS_SELECTOR, "a.gpro0wi8.b1v8xokw")
-    print(element.get_attribute('innerText'))
+    return element.get_attribute('innerText')
 
 
 def get_images(post):
