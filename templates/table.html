@@ -56,7 +56,11 @@
             {{ post.video }}
           </div>
           <div class="cell" data-title="image">
-            {{ post.image }}
+               {% for item in post.image %}
+                  <tr class="cell" >
+                    <a href="{{item}}"> image </a>
+                  </tr>
+               {% endfor %}
           </div>
         </div>
       {% endfor %}

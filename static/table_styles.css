@@ -20,8 +20,8 @@ body {
 
 .wrapper {
   margin: 0 auto;
-  padding: 40px;
-  max-width: 800px;
+  padding: 17px;
+  /* max-width: 800px; */
 }
 
 .table {
@@ -56,6 +56,8 @@ body {
 }
 @media screen and (max-width: 580px) {
   .row {
+    max-width: 150px;
+    word-wrap: break-word;
     padding: 14px 0 7px;
     display: block;
   }
@@ -83,11 +85,15 @@ body {
 }
 
 .cell {
+  max-width: 150px;
+  word-wrap: break-word;
   padding: 6px 12px;
   display: table-cell;
 }
 @media screen and (max-width: 580px) {
   .cell {
+   max-width: 150px;
+  word-wrap: break-word;
     padding: 2px 16px;
     display: block;
   }
