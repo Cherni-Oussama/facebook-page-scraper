@@ -7,21 +7,29 @@
 # @Contact :   oussama.cherni@ensi-uma.tn
 # ---------------------------------------------------------------------------
 
-import json
 from utils import *
 from selenium.webdriver.common.by import By
 
 
 class FacebookScraper:
-    data_dict = {}
+    """A class used to represent a single page scraper."""
 
-    def __init__(self, page_name, timeout):
+    def __init__(self, page_name: str, timeout: int):
+        """
+        Instantiate a FacebookScraper object.
+
+        Args:
+            page_name (str): the name of the page
+            timeout (int): the maximum time for scraping
+        """
+
+        self.driver = None
         self.page_name = page_name
         self.URL = get_full_path(page_name)
-        self.driver = None
         self.timeout = timeout
 
     def init_driver(self):
+        """ Initialize the driver """
         download_chrome_driver()
         self.driver = initialize_driver()
         self.driver.get(self.URL)
@@ -29,6 +37,13 @@ class FacebookScraper:
         close_error_popup(self.driver)
 
     def scrape_data(self):
+        """ Function to scrap all the posts of the current facebook page opened by the driver.
+
+        Returns:
+            data (dict): A dictionary containing all the scraped posts from the page.
+        """
+        data = {}
+
         all_posts = self.driver.find_elements(By.CSS_SELECTOR, '[aria-posinset]')
         for index, post in enumerate(all_posts):
             id_ = index
@@ -39,7 +54,7 @@ class FacebookScraper:
             posted_time = get_posted_time(post)
             images = get_images(post)
 
-            self.data_dict[id_] = {
+            data[id_] = {
                 "page_name": self.page_name,
                 "shares": shares,
                 "reaction_count": total_reactions,
@@ -49,5 +64,4 @@ class FacebookScraper:
                 "video": video,
                 "image": images,
             }
-        # json_data = json.dumps(self.data_dict, indent=4)
-        return self.data_dict
+        return data
