@@ -4,14 +4,14 @@ services:
   web:
     build: ./
     ports:
-      - 80:80
+      - "80:80"
     environment:
         - DB_URL=mongodb://db/myTestDB
 
   db:
       image: mongo
       ports:
-          - 27017:27017
+          - "27017:27017"
       volumes:
           - taskdb:/data/db
 

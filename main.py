@@ -9,7 +9,7 @@
 
 import uvicorn
 from fastapi import FastAPI
-from router import router
+from routers.router import router
 from fastapi.staticfiles import StaticFiles
 
 

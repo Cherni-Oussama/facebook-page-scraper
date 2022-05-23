@@ -7,7 +7,7 @@
 # @Contact :   oussama.cherni@ensi-uma.tn
 # ---------------------------------------------------------------------------
 
-from utils import *
+from scraper.utils import *
 from selenium.webdriver.common.by import By
 
 

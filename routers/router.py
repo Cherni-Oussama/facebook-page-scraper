@@ -7,8 +7,8 @@
 # @Contact :   oussama.cherni@ensi-uma.tn
 # ---------------------------------------------------------------------------
 from config import db
-from scraper import FacebookScraper
-from utils import *
+from scraper.scraper import FacebookScraper
+from scraper.utils import *
 from fastapi import APIRouter, Request, Form
 from fastapi.templating import Jinja2Templates
 
